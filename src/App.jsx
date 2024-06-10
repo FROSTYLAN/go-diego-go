@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ChakraProvider, Box, Tabs, TabList, Tab, TabPanels } from '@chakra-ui/react';
-import { BrowserRouter as Router, Route, Routes, Link, useLocation, Outlet } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Link, useLocation, Outlet } from 'react-router-dom';
 import GeomtricalConsideration from './app/geometrical-consideration';
 import OreAccess from './app/ore-access';
 import MinimumRequiredOperatingRoom from './app/minimum-required-operating-room';
