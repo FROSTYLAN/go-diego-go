@@ -1,4 +1,4 @@
-import { Box, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Image, Input } from '@chakra-ui/react';
+import { Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Image, Input } from '@chakra-ui/react';
 import * as React from 'react';
 
 import Img1 from '../assets/Imagen1.png';
