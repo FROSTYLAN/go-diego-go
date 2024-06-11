@@ -15,7 +15,7 @@ function FinalOverallPitSlope() {
         calTemp[0] = inTemp[1] / inTemp[0] 
         calTemp[1] = Math.round((inTemp[0] * calTemp[0]) / Math.tan(inTemp[4] * (Math.PI / 180)))
 
-        outTemp[0] = Number((Math.PI * Math.pow(inTemp[0], 2) * inTemp[1]) / 4).toFixed(2)
+        outTemp[0] = Number(Math.round((Math.atan((inTemp[0] * calTemp[0]) / ((inTemp[2]) * inTemp[3] + calTemp[1])) * (180 / Math.PI)) * 10) / 10).toFixed(2)
 
         setIns(inTemp);
         setOuts(outTemp)
