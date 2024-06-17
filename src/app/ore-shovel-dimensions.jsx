@@ -4,7 +4,7 @@ import Imagen4 from '../assets/Imagen4.png'
 
 function ShovelDimensions() {
     const [ins, setIns] = React.useState([19.75, 40, 35.25, 54.50]);
-    const [outs, setOuts] = React.useState([18.29, 21.64, 33.22]);
+    const [outs, setOuts] = React.useState([60, 71, 109]);
 
     const handleChange = (value, index) => {
         const inTemp = [...ins]
