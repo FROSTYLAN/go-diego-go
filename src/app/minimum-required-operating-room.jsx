@@ -1,31 +1,28 @@
 import { Image, Input, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import * as React from 'react';
-import Image3 from '../assets/Imagen3.png';
+import Image3 from '../assets/Imagen3.jpg';
 
 function MinimumRequiredOperatingRoom() {
-  const [ins, setIns] = React.useState([40, 5, 45, 85, 16, 8, 9, 12.25, 45.50, 28, 35.25, 43.50, 54.50]);
-  const [outs, setOuts] = React.useState([8, 16, 21, 45.5, 35.25, 102, 63.5, 60, 42, 43.5, 54.5, 35.25, 64.30, 25.5, 25.5, 'Cuadrada']);
+  const [ins, setIns] = React.useState([45.50, 28, 35.25, 43.50, 40.00, 54.50, 9, 4, 16, 45, 5]);
+  const [outs, setOuts] = React.useState([8.00, 21.00, 102.00, 63.45, 60.00, 42.00, 64.30]);
 
-  const handleChange = (value, index) => {
+  const handleChange = (value, index, type) => {
     const inTemp = [...ins]
     const outTemp = [...outs]
-    inTemp[index] = value
 
-    outTemp[0] = inTemp[5]
-    outTemp[1] = (2 * outTemp[0]) / Math.tan(inTemp[2] * Math.PI / 180);
-    outTemp[2] = inTemp[1] + inTemp[4]
-    outTemp[3] = inTemp[8]
-    outTemp[4] = inTemp[10]
-    outTemp[5] = Math.round(outTemp[2] + inTemp[8] + inTemp[10])
-    outTemp[6] = Math.round(0.9 * 2 * inTemp[10] * 10) / 10
-    outTemp[7] = 60
-    outTemp[8] = outTemp[5] - outTemp[7]
-    outTemp[9] = inTemp[11]
-    outTemp[10] = inTemp[12]
-    outTemp[11] = inTemp[10]
-    outTemp[12] = Math.atan(inTemp[0] / (outTemp[10] - outTemp[11])) * (180 / Math.PI)
-    outTemp[13] = Math.round((25 * inTemp[7] / 12) * 10) / 10
-    outTemp[14] = outTemp[13]
+    if (type === 'in') {
+      inTemp[index] = value
+    } else if (type === 'out') {
+      outTemp[index] = value
+    }
+
+    outTemp[0] = Number((2 * inTemp[7]) / Math.tan(inTemp[9] * (Math.PI / 180))).toFixed(0);
+    outTemp[1] = inTemp[8] + inTemp[10]
+    outTemp[2] = Math.round(inTemp[1] + inTemp[0] + inTemp[2])
+    outTemp[3] = inTemp[2] * 0.9 * 2
+    outTemp[4] = outTemp[4]
+    outTemp[5] = outTemp[2] - outTemp[4]
+    outTemp[6] = Math.atan(inTemp[4] / (inTemp[5] - inTemp[2])) * (180 / Math.PI)
 
     setIns(inTemp);
     setOuts(outTemp)
@@ -42,7 +39,19 @@ function MinimumRequiredOperatingRoom() {
               </Tr>
             </Thead>
             <Tbody>
-              {['Bench height', 'Minimun clearence between outer truck tire and the safety berm', 'Angle of repose', 'Capacity Truck', 'Truck width', 'Tire rolling radius', 'Loading Shovel', 'hole diameter (De)', 'Dumping radius at maximum height - A', 'Dumping height maximum', 'Radius of level floor', 'Cutting height maximum', 'Cutting radius maximum'].map((label, index) => (
+              {[
+                'Radio de descarga (B)',
+                'Altura máxima de descarga (A)',
+                'Dimensión del radio del piso nivelado (G)',
+                'Altura máxima de la pala (D)',
+                'Altura de banco (H)',
+                'Radio máximo de corte de pala (E)',
+                'Capacidad de cucharón',
+                'Radio de rodadura del neumático',
+                'Ancho de Camión',
+                'Ángulo de reposo',
+                'Tolerancia mínima'
+              ].map((label, index) => (
                 <Tr key={index}>
                   <Td>{label}</Td>
                   <Td>
@@ -50,7 +59,7 @@ function MinimumRequiredOperatingRoom() {
                       placeholder='small size'
                       size='sm'
                       value={ins[index]}
-                      onChange={(e) => handleChange(parseFloat(e.target.value) || 0, index)}
+                      onChange={(e) => handleChange(parseFloat(e.target.value) || 0, index, 'in')}
                     />
                   </Td>
                 </Tr>
@@ -66,15 +75,25 @@ function MinimumRequiredOperatingRoom() {
               </Tr>
             </Thead>
             <Tbody>
-              {['Height Safety Berm', 'Width Safety Berm', 'Distancia linea central a la cresta (TC)', 'Maximun dumping radius (B)', 'Radius of level flor (A)', 'Dimensiones esperadas del Working Bench (Wb)', 'Cut width (Wc)', 'Cut width less', 'Safety Bench (SB)', 'Cut Height (D)', 'Shovel Cutting Radius (E)', 'Radius of level flor (G)', 'Bench Face Angle', 'Burden', 'Espaciamiento', 'Malla de perforación'].map((label, index) => (
+              {[
+                'Ancho de berma',
+                'Distancia línea central a la cresta (TC)',
+                'Working Bench',
+                'Ancho de corte (Wc)',
+                'Ancho de corte ideal',
+                'Banco de seguridad (Sb)',
+                'Ángulo de fase'
+              ].map((label, index) => (
                 <Tr key={index}>
                   <Td>{label}</Td>
                   <Td>
                     <Input
                       placeholder='small size'
                       size='sm'
-                      disabled
+                      type={index === 4 ? 'number' : null}
+                      disabled={index === 4 ? false : true}
                       value={outs[index]}
+                      onChange={(e) => handleChange(parseFloat(e.target.value) || 0, index, 'out')}
                     />
                   </Td>
                 </Tr>
@@ -83,7 +102,9 @@ function MinimumRequiredOperatingRoom() {
           </Table>
         </TableContainer>
       </div>
-      <Image src={Image3} alt="image3" />
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Image src={Image3} alt="image3" />
+      </div>
     </>
   );
 }

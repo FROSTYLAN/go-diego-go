@@ -11,7 +11,7 @@ function GeomtricalConsideration() {
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
-    [40, 40, 40, 40, 40]
+    [35, 35, 35, 35, 35]
   ]);
 
   React.useEffect(() => {

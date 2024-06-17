@@ -4,24 +4,31 @@ import Imagen7 from '../assets/Imagen7.png'
 import Imagen8 from '../assets/Imagen8.png'
 
 function RampDrilling() {
-    const [ins, setIns] = React.useState([9.875, 15, 30, 1, 0.3, 0.7]);
-    const [outs, setOuts] = React.useState([25, 25, 7, 17, 22, 'Cuadrada']);
+    const [ins, setIns] = React.useState([2.3, 12.25, 40, 'Anfo', 0.8, 5, 5, 25, 1, 0.3, 0.7]);
+    const [outs, setOuts] = React.useState([25, 25, 7.5, 17.5, 47.5, 30, 40.9, 1227, 1.3, 925.9, 1437500, 'Cuadrada']);
 
     const handleChange = (value, index) => {
         const inTemp = [...ins]
         const outTemp = [...outs]
         inTemp[index] = value
 
-        outTemp[0] = Number((inTemp[0] * inTemp[2]) / 12).toFixed(2)
-        outTemp[1] = Number(Number(outTemp[0]) * inTemp[3]).toFixed(2)
-        outTemp[2] = Number(Number(outTemp[0]) * inTemp[4]).toFixed(2)
-        outTemp[3] = Number(Number(outTemp[0]) * inTemp[5]).toFixed(2)
-        outTemp[4] = Number(Number(outTemp[2]) + inTemp[1]).toFixed(2)
-debugger
+        // modifica aquí
+        outTemp[0] = Math.floor((inTemp[7] * inTemp[1]) / 12);
+        outTemp[1] = outTemp[0] * inTemp[8]
+        outTemp[2] = inTemp[9] * outTemp[0]
+        outTemp[3] = outTemp[0] * inTemp[10]
+        outTemp[4] = outTemp[2] + inTemp[2]
+        outTemp[5] = outTemp[4] - outTemp[3]
+        outTemp[6] = Math.round(0.3405 * inTemp[4] * Math.pow(inTemp[1], 2) * 10) / 10
+        outTemp[7] = outTemp[6] * outTemp[5]
+        outTemp[8] = (outTemp[7] * 27) / (inTemp[2] * outTemp[0] * outTemp[1])
+        outTemp[9] = outTemp[7] / outTemp[8]
+        outTemp[10] = inTemp[2] * outTemp[0] * outTemp[1] * inTemp[0] * inTemp[5] * inTemp[6]
+ 
         if (outTemp[1] / outTemp[0] === 1) {
-            outTemp[5] = "Cuadrada";
+            outTemp[11] = "Cuadrada";
         } else if (outTemp[1] / outTemp[0] >= 1) {
-            outTemp[5] = "Rectangular";
+            outTemp[11] = "Rectangular";
         }
 
         setIns(inTemp);
@@ -44,8 +51,13 @@ debugger
                             <Table>
                                 <Tbody>
                                     {[
-                                        'Hole diameter',
-                                        'Hole depth',
+                                        'Densidad de la roca',
+                                        'Díametro del taladro',
+                                        'Altura de banco',
+                                        'Explosivo',
+                                        'Densidad del explosivo',
+                                        'Filas',
+                                        'Tal/fila',
                                         'Kb',
                                         'Ks',
                                         'Kj',
@@ -57,8 +69,10 @@ debugger
                                             </Td>
                                             <Td>
                                                 <Input width='100px'
-                                                    placeholder='small size'
                                                     size='sm'
+                                                    type={index === 3 ? 'text' : 'number'}
+                                                    disabled={index === 3 ? true : false}
+                                                    placeholder='Ingresa valor'
                                                     value={ins[index]}
                                                     onChange={(e) => handleChange(parseFloat(e.target.value) || 0, index)}
                                                 />
@@ -82,6 +96,12 @@ debugger
                                         'Subdrilling',
                                         'Stemming',
                                         'Hole lenght',
+                                        'Load lenght',
+                                        'LD',
+                                        'Wexp',
+                                        'PF',
+                                        'Vexp',
+                                        'Ton',
                                         'Malla de perforación'
                                     ].map((label, index) => (
                                         <Tr key={index}>
