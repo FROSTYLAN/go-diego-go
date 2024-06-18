@@ -7,11 +7,11 @@ import ShovelDimensions from './ore-shovel-dimensions'
 function OreAccess() {
   return (
     <div style={{ display: 'flex', padding: '1rem', overflow: 'auto' }}>
-      <div style={{display: 'flex'}}>
-      <ShovelDimensions />
-      <BodyGeometry />
-      <RampVolume />
-      <RampDrilling />
+      <div style={{ display: 'flex' }}>
+        <ShovelDimensions />
+        <BodyGeometry />
+        <RampVolume />
+        <RampDrilling />
       </div>
     </div>
   );

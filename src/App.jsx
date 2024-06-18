@@ -5,6 +5,8 @@ import GeomtricalConsideration from './app/geometrical-consideration';
 import OreAccess from './app/ore-access';
 import MinimumRequiredOperatingRoom from './app/minimum-required-operating-room';
 import PitSlopeGeometry from './app/pot-slope-geometry';
+import PlanarFail from './app/planar-fail';
+import CircularFail from './app/circular-fail';
 
 function App() {
   const location = useLocation();
@@ -19,9 +21,11 @@ function App() {
               <Tab as={Link} to="/ore-access">Ore Access</Tab>
               <Tab as={Link} to="/minimum-required-operating-room">Minimum Required Operating Room</Tab>
               <Tab as={Link} to="/pit-slope-geometry">Pit Slope Geometry</Tab>
+              <Tab as={Link} to="/falla-planar">Falla planar</Tab>
+              <Tab as={Link} to="/falla-circular">Falla circular</Tab>
             </TabList>
 
-            <TabPanels overflow='auto' maxHeight='calc(100vh - 110px)'> 
+            <TabPanels overflow='auto' maxHeight='calc(100vh - 110px)'>
               <Outlet />
             </TabPanels>
           </Tabs>
@@ -41,6 +45,10 @@ function getIndexFromLocation(pathname) {
       return 2;
     case '/pit-slope-geometry':
       return 3;
+    case '/falla-planar':
+      return 4;
+    case '/falla-circular':
+      return 5;
     default:
       return 0;
   }
@@ -55,6 +63,8 @@ function MainApp() {
           <Route path="ore-access" element={<OreAccess />} />
           <Route path="minimum-required-operating-room" element={<MinimumRequiredOperatingRoom />} />
           <Route path="pit-slope-geometry" element={<PitSlopeGeometry />} />
+          <Route path="falla-planar" element={<PlanarFail />} />
+          <Route path="falla-circular" element={<CircularFail />} />
           <Route path="*" element={<GeomtricalConsideration />} />
         </Route>
       </Routes>
