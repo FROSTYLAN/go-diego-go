@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card, CardHeader, CardBody, Heading, Stack, StackDivider, Box, Image, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Input, Text } from '@chakra-ui/react';
 import Imagen21 from '../assets/Imagen21.png'
 
-function CircularB({ defaults }) {
+function CircularB({ defaults, fors }) {
     const [ins, setIns] = React.useState([30]);
     const [outs, setOuts] = React.useState([50, '-', -8.11, 27.89, '-', -9.69, 26.31, '-', -11.09, 24.91, '-', -13.90, 22.10]);
 
@@ -11,7 +11,19 @@ function CircularB({ defaults }) {
         const outTemp = [...outs]
         inTemp[index] = value
 
-        outTemp[0] = Number((Math.PI * Math.pow(inTemp[0], 2) * inTemp[1]) / 4).toFixed(2)
+        outTemp[0] = Number(defaults[1] * defaults[3] / defaults[2]).toFixed(2)
+        outTemp[1] = '-'
+        outTemp[2] = Number(1 / fors[0][2] * Math.log(fors[0][1] * outTemp[0] / (fors[0][0] - outTemp[0]))).toFixed(2)
+        outTemp[3] = Number(Number(outTemp[2]) + (1.2 * Number(inTemp[0]))).toFixed(2)
+        outTemp[4] = '-'
+        outTemp[5] = Number(1 / fors[1][2] * Math.log(fors[1][1] * outTemp[0] / (fors[1][0] - outTemp[0]))).toFixed(2)
+        outTemp[6] = Number(Number(outTemp[5]) + (1.2 * Number(inTemp[0]))).toFixed(2)
+        outTemp[7] = '-'
+        outTemp[8] = Number(1 / fors[2][2] * Math.log(fors[2][1] * outTemp[0] / (fors[2][0] - outTemp[0]))).toFixed(2)
+        outTemp[9] = Number(Number(outTemp[8]) + (1.2 * Number(inTemp[0]))).toFixed(2)
+        outTemp[10] = '-'
+        outTemp[11] = Number(1 / fors[3][2] * Math.log(fors[3][1] * outTemp[0] / (fors[3][0] - outTemp[0]))).toFixed(2)
+        outTemp[12] = Number(Number(outTemp[11]) + (1.2 * Number(inTemp[0]))).toFixed(2)
 
         setIns(inTemp);
         setOuts(outTemp)

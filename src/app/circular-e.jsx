@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Card, CardHeader, CardBody, Heading, Stack, StackDivider, Box, Image, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Input, Text } from '@chakra-ui/react';
 import Imagen24 from '../assets/Imagen24.png'
 
-function CircularE({ defaults }) {
-    const [ins, setIns] = React.useState([350, 106.68, 30, 70]);
+function CircularE({ defaults, fors }) {
+    const [ins, setIns] = React.useState([350, 30, 70]);
     const [outs, setOuts] = React.useState([44.50, '-', 4.20, '-', 3.34, '-', 3.22, '-', 2.53]);
 
     const handleChange = (value, index) => {
@@ -11,7 +11,15 @@ function CircularE({ defaults }) {
         const outTemp = [...outs]
         inTemp[index] = value
 
-        outTemp[0] = Number((Math.PI * Math.pow(inTemp[0], 2) * inTemp[1]) / 4).toFixed(2)
+        outTemp[0] = Number(inTemp[2] - inTemp[1] * (1.2 - 0.5 * (inTemp[0] / defaults[3]))).toFixed(2)
+        outTemp[1] = '-'
+        outTemp[2] = Number(fors[0][0] / (1 + fors[0][1] * Math.exp(-fors[0][2] * Number(outTemp[0])))).toFixed(2)
+        outTemp[3] = '-'
+        outTemp[4] = Number(fors[1][0] / (1 + fors[1][1] * Math.exp(-fors[1][2] * Number(outTemp[0])))).toFixed(2)
+        outTemp[5] = '-'
+        outTemp[6] = Number(fors[2][0] / (1 + fors[2][1] * Math.exp(-fors[2][2] * Number(outTemp[0])))).toFixed(2)
+        outTemp[7] = '-'
+        outTemp[8] = Number(fors[3][0] / (1 + fors[3][1] * Math.exp(-fors[3][2] * Number(outTemp[0])))).toFixed(2)
 
         setIns(inTemp);
         setOuts(outTemp)
