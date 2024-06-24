@@ -3,15 +3,23 @@ import { Card, CardHeader, CardBody, Heading, Stack, StackDivider, Box, Image, T
 import Imagen18 from '../assets/Imagen18.png'
 
 function PlanarE({ defaults }) {
-    const [ins, setIns] = React.useState([400, 121.92, 30, 70, 50]);
-    const [outs, setOuts] = React.useState([48.66, '-', 13.85, '-', 8.26, '-', 7.48, '-', 6.61]);
+    const [ins, setIns] = React.useState([300, 30, 70, 50]);
+    const [outs, setOuts] = React.useState([45.08, '-', 13.85, '-', 9.20, '-', 8.29, '-', 7.30]);
 
     const handleChange = (value, index) => {
         const inTemp = [...ins]
         const outTemp = [...outs]
         inTemp[index] = value
 
-        outTemp[0] = Number((Math.PI * Math.pow(inTemp[0], 2) * inTemp[1]) / 4).toFixed(2)
+        outTemp[0] = Number(2 * Math.sqrt((Number(inTemp[2]) - Number(inTemp[3])) * (Number(inTemp[3]) - Number(inTemp[1]) * (1 - 0.5 * Math.pow(Number(inTemp[0]) / Number(defaults[3]), 2))))).toFixed(2);
+        outTemp[1] = '-';
+        outTemp[2] = Number(3740.7 * Math.pow(Number(outTemp[0]), -1.507)).toFixed(2);
+        outTemp[3] = '-';
+        outTemp[4] = Number(1924.7 * Math.pow(Number(outTemp[0]), -1.403)).toFixed(2);
+        outTemp[5] = '-';
+        outTemp[6] = Number(1401.4 * Math.pow(Number(outTemp[0]), -1.347)).toFixed(2);
+        outTemp[7] = '-';
+        outTemp[8] = Number(1035 * Math.pow(Number(outTemp[0]), -1.301)).toFixed(2);
 
         setIns(inTemp);
         setOuts(outTemp)

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Card, CardHeader, CardBody, Heading, Stack, StackDivider, Box, Image, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Input, Text } from '@chakra-ui/react';
 import Imagen14 from '../assets/Imagen14.png'
 
-function PlanarA() {
-    const [ins, setIns] = React.useState([30, 70, 40]);
+function PlanarA({ defaults }) {
+    const [ins, setIns] = React.useState([30, 70, 50]);
     const [outs, setOuts] = React.useState([40, '-', 14.41, 143.86, '-', 10.88, 108.86, '-', 9.74, 97.25, '-', 8.52, 85.11]);
 
     const handleChange = (value, index) => {
@@ -11,7 +11,19 @@ function PlanarA() {
         const outTemp = [...outs]
         inTemp[index] = value
 
-        outTemp[0] = Number((Math.PI * Math.pow(inTemp[0], 2) * inTemp[1]) / 4).toFixed(2)
+        outTemp[0] = Number(2 * Math.sqrt((Number(inTemp[1]) - Number(inTemp[2])) * (Number(inTemp[2]) - Number(inTemp[0])))).toFixed(2)
+        outTemp[1] = '-'
+        outTemp[2] = Number(3740.7 * Math.pow(Number(outTemp[0]), -1.507)).toFixed(2)
+        outTemp[3] = Number(Number(defaults[2]) * Number(outTemp[2]) / Number(defaults[1])).toFixed(2)
+        outTemp[4] = '-'
+        outTemp[5] = Number(1924.7 * Math.pow(Number(outTemp[0]), -1.403)).toFixed(2)
+        outTemp[6] = Number(Number(defaults[2]) * Number(outTemp[5]) / Number(defaults[1])).toFixed(2)
+        outTemp[7] = '-'
+        outTemp[8] = Number(1401.4 * Math.pow(Number(outTemp[0]), -1.347)).toFixed(2)
+        outTemp[9] = Number(Number(defaults[2]) * Number(outTemp[8]) / Number(defaults[1])).toFixed(2)
+        outTemp[10] = '-'
+        outTemp[11] = Number(1035 * Math.pow(Number(outTemp[0]), -1.301)).toFixed(2)
+        outTemp[12] = Number(Number(defaults[2]) * Number(outTemp[11]) / Number(defaults[1])).toFixed(2)
 
         setIns(inTemp);
         setOuts(outTemp)

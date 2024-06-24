@@ -8,7 +8,7 @@ import PlanarF from './planar-f';
 import { TableContainer, Table, Tr, Tbody, Td, Input, Text } from '@chakra-ui/react';
 
 function PlanarFail() {
-    const [defaults, setDefaults] = React.useState([2.495, 160.26, 1600, 500])
+    const [defaults, setDefaults] = React.useState([2.495, 160.00, 1600, 500])
 
     const handleChange = (value, index) => {
         const inTemp = [...defaults]

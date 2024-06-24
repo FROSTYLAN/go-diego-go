@@ -3,15 +3,23 @@ import { Card, CardHeader, CardBody, Heading, Stack, StackDivider, Box, Image, T
 import Imagen19 from '../assets/Imagen19.png'
 
 function PlanarF({ defaults }) {
-    const [ins, setIns] = React.useState([100, 30.48, 30, 70, 50]);
-    const [outs, setOuts] = React.useState([80.13, '-', 12.81, '-', 9.64, '-', 8.37, '-', 7.15]);
+    const [ins, setIns] = React.useState([100, 30, 70, 50]);
+    const [outs, setOuts] = React.useState([80.00, '-', 12.83, '-', 9.65, '-', 8.38, '-', 7.16]);
 
     const handleChange = (value, index) => {
         const inTemp = [...ins]
         const outTemp = [...outs]
         inTemp[index] = value
 
-        outTemp[0] = Number((Math.PI * Math.pow(inTemp[0], 2) * inTemp[1]) / 4).toFixed(2)
+        outTemp[0] = Number((1 + (3 * Number(inTemp[0])) / Number(defaults[3])) * (Number(defaults[3]) * Number(defaults[1]) / Number(defaults[2]))).toFixed(2);
+        outTemp[1] = '-';
+        outTemp[2] = Number(Math.pow(3740.7 / Number(outTemp[0]), 1000 / 1507)).toFixed(2);
+        outTemp[3] = '-';
+        outTemp[4] = Number(Math.pow(1924.7 / Number(outTemp[0]), 1000 / 1403)).toFixed(2);
+        outTemp[5] = '-';
+        outTemp[6] = Number(Math.pow(1401.4 / Number(outTemp[0]), 1000 / 1347)).toFixed(2);
+        outTemp[7] = '-';
+        outTemp[8] = Number(Math.pow(1035.5 / Number(outTemp[0]), 1000 / 1301)).toFixed(2);
 
         setIns(inTemp);
         setOuts(outTemp)

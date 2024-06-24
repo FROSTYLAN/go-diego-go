@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, Heading, Stack, StackDivider, Box, Image, T
 import Imagen16 from '../assets/Imagen16.png'
 
 function PlanarC({ defaults }) {
-    const [ins, setIns] = React.useState([350, 106.68, 30, 70, 50]);
+    const [ins, setIns] = React.useState([300, 30, 70, 50]);
     const [outs, setOuts] = React.useState([40, '-', 4.72, '-', 3.77, '-', 3.59, '-', 2.84]);
 
     const handleChange = (value, index) => {
@@ -11,7 +11,15 @@ function PlanarC({ defaults }) {
         const outTemp = [...outs]
         inTemp[index] = value
 
-        outTemp[0] = Number((Math.PI * Math.pow(inTemp[0], 2) * inTemp[1]) / 4).toFixed(2)
+        outTemp[0] = Number(2 * Math.sqrt((Number(inTemp[2]) - Number(inTemp[3])) * (Number(inTemp[3]) - Number(inTemp[1]) * (1 - 0.1 * Math.pow(Number(inTemp[0]) / Number(defaults[3]), 2))))).toFixed(2)
+        outTemp[1] = '-'
+        outTemp[2] = Number(3740.7 * Math.pow(Number(outTemp[0]), -1.507)).toFixed(2)
+        outTemp[3] = '-'
+        outTemp[4] = Number(1924.7 * Math.pow(Number(outTemp[0]), -1.403)).toFixed(2)
+        outTemp[5] = '-'
+        outTemp[6] = Number(1401.4 * Math.pow(Number(outTemp[0]), -1.347)).toFixed(2)
+        outTemp[7] = '-'
+        outTemp[8] = Number(1035 * Math.pow(Number(outTemp[0]), -1.301)).toFixed(2)
 
         setIns(inTemp);
         setOuts(outTemp)
